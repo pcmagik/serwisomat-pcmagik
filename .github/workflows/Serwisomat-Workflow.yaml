@@ -45,3 +45,5 @@ jobs:
 
       - name: Odbiór przez klienta
         run: echo "Urządzenie odebrane przez klienta. Proces zakończony."
+
+        
