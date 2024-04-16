@@ -1,0 +1,2 @@
+# serwisomat-pcmagik
+ 
