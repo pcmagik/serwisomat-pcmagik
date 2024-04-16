@@ -33,9 +33,9 @@ jobs:
         run: echo "Czekanie na decyzję klienta..."
 
   repair_decision:
-    if: ${{ github.event.inputs.repair_approved == 'true' }}
-    needs: [process_repair]
     runs-on: ubuntu-latest
+    needs: process_repair
+    if: ${{ github.event.inputs.repair_approved == 'true' }}
     steps:
       - name: Naprawa urządzenia
         run: echo "Naprawa urządzenia w toku"
@@ -47,9 +47,9 @@ jobs:
         run: echo "Urządzenie odebrane przez klienta. Proces zakończony."
 
   diagnosis_fee:
-    if: ${{ github.event.inputs.repair_approved == 'false' }}
-    needs: [process_repair]
     runs-on: ubuntu-latest
+    needs: process_repair
+    if: ${{ github.event.inputs.repair_approved == 'false' }}
     steps:
       - name: Opłata za diagnozę
         run: echo "Opłata za diagnozę naliczona. Klient zostanie poinformowany."
