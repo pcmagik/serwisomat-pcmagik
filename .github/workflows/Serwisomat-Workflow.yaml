@@ -9,9 +9,6 @@ on:
       device_description:
         description: 'Opis Urządzenia'
         required: true
-      repair_approved:
-        description: 'Decyzja o naprawie (true/false)'
-        required: true
 
 jobs:
   process_repair:
@@ -19,43 +16,24 @@ jobs:
     steps:
       - name: Zgłoszenie naprawy
         run: echo "Zgłoszenie przyjęte od ${{ github.event.inputs.customer_email }} dla urządzenia: ${{ github.event.inputs.device_description }}"
-
+      
       - name: Przyjęcie urządzenia
         run: echo "Urządzenie przyjęte do serwisu"
-
+      
       - name: Diagnoza
         run: echo "Diagnoza urządzenia w toku"
-
+      
       - name: Wycena naprawy
         run: echo "Wycena wysłana do klienta. Oczekiwanie na odpowiedź..."
-
+      
       - name: Decyzja klienta
         run: echo "Czekanie na decyzję klienta..."
-
-  repair_decision:
-    runs-on: ubuntu-latest
-    needs: process_repair
-    if: ${{ github.event.inputs.repair_approved == 'true' }}
-    steps:
+      
       - name: Naprawa urządzenia
         run: echo "Naprawa urządzenia w toku"
-
+      
       - name: Powrót do serwisomatu
         run: echo "Urządzenie gotowe do odbioru. Wróciło do serwisomatu."
-
-      - name: Odbiór przez klienta
-        run: echo "Urządzenie odebrane przez klienta. Proces zakończony."
-
-  diagnosis_fee:
-    runs-on: ubuntu-latest
-    needs: process_repair
-    if: ${{ github.event.inputs.repair_approved == 'false' }}
-    steps:
-      - name: Opłata za diagnozę
-        run: echo "Opłata za diagnozę naliczona. Klient zostanie poinformowany."
-
-      - name: Powrót do serwisomatu
-        run: echo "Urządzenie gotowe do odbioru. Wróciło do serwisomatu."
-
+      
       - name: Odbiór przez klienta
         run: echo "Urządzenie odebrane przez klienta. Proces zakończony."
