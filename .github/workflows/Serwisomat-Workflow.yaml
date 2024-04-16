@@ -33,11 +33,11 @@ jobs:
         run: echo "Czekanie na decyzję klienta..."
 
       - name: Naprawa urządzenia
-        if: ${{ inputs.repair_approved == 'true' }}
+        if: ${{ github.event.inputs.repair_approved == 'true' }}
         run: echo "Naprawa urządzenia w toku"
 
       - name: Opłata za diagnozę
-        if: ${{ inputs.repair_approved == 'false' }}
+        if: ${{ github.event.inputs.repair_approved == 'false' }}
         run: echo "Opłata za diagnozę naliczona. Klient zostanie poinformowany."
 
       - name: Powrót do serwisomatu
