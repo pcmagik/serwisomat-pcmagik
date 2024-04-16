@@ -9,6 +9,9 @@ on:
       device_description:
         description: 'Opis Urządzenia'
         required: true
+      repair_approved:
+        description: 'Decyzja o naprawie (true/false)'
+        required: true
 
 jobs:
   process_repair:
@@ -30,11 +33,11 @@ jobs:
         run: echo "Czekanie na decyzję klienta..."
 
       - name: Naprawa urządzenia
-        if: github.event.inputs.repair_approved == 'true'
+        if: ${{ github.event.inputs.repair_approved }} == 'true'
         run: echo "Naprawa urządzenia w toku"
 
       - name: Opłata za diagnozę
-        if: github.event.inputs.repair_approved == 'false'
+        if: ${{ github.event.inputs.repair_approved }} == 'false'
         run: echo "Opłata za diagnozę naliczona. Klient zostanie poinformowany."
 
       - name: Powrót do serwisomatu
@@ -42,4 +45,3 @@ jobs:
 
       - name: Odbiór przez klienta
         run: echo "Urządzenie odebrane przez klienta. Proces zakończony."
-
