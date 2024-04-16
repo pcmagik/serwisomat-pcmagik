@@ -15,7 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Zgłoszenie naprawy
-        run: echo "Zgłoszenie przyjęte od ${{ github.event.inputs.customer_email }} dla urządzenia: ${{ github.event.inputs.device_description }}"
+        run: |
+          echo "Zgłoszenie przyjęte od ${{ github.event.inputs.customer_email }} dla urządzenia: ${{ github.event.inputs.device_description }}"
+        if: ${{ github.event.inputs.customer_email && github.event.inputs.device_description }}
       
       - name: Przyjęcie urządzenia
         run: echo "Urządzenie przyjęte do serwisu"
