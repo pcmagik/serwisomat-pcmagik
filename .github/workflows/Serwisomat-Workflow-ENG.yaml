@@ -1,0 +1,49 @@
+name: Service Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      customer_name:
+        description: 'Customer full name'
+        required: true
+      customer_phone:
+        description: 'Customer phone number'
+        required: true
+      device_description:
+        description: 'Device make and model'
+        required: true
+      device_serial_number:
+        description: 'Device serial number'
+        required: true
+      issue_description:
+        description: 'Description of the issue'
+        required: true
+
+jobs:
+  process_repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report reception
+        run: |
+              echo "Report from customer: ${{ github.event.inputs.customer_name }}. Phone contact: ${{ github.event.inputs.customer_phone }}. Device: ${{ github.event.inputs.device_description }}, serial number: ${{ github.event.inputs.device_serial_number }}. Issue described: ${{ github.event.inputs.issue_description }}. An SMS confirmation has been sent."
+
+      - name: Device reception
+        run: echo "Device has been received at the service center. An SMS notification has been sent."
+
+      - name: Diagnosis
+        run: echo "Starting the device diagnosis. An SMS update has been sent."
+
+      - name: Repair quotation
+        run: echo "Preparing the repair quotation. An SMS with the quotation has been sent."
+
+      - name: Awaiting customer decision
+        run: echo "Waiting for the customer's decision on the repair. An SMS reminder has been sent."
+
+      - name: Repair in progress
+        run: echo "The device is being repaired. An SMS update has been sent."
+
+      - name: Return to service point
+        run: echo "The repair has been completed. The device is ready for pickup. An SMS notification has been sent."
+
+      - name: Customer pickup
+        run: echo "The device has been picked up by the customer. A thank-you SMS has been sent."
