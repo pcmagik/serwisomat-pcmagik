@@ -25,28 +25,28 @@ jobs:
     steps:
       - name: Zgłoszenie naprawy
         run: |
-              echo "Zgłoszenie od klienta: ${{ github.event.inputs.customer_name }}. Kontakt telefoniczny: ${{ github.event.inputs.customer_phone }}. Urządzenie: ${{ github.event.inputs.device_description }}, numer seryjny: ${{ github.event.inputs.device_serial_number }}. Opis usterki: ${{ github.event.inputs.issue_description }}."
+              echo "Otrzymaliśmy zgłoszenie od klienta: ${{ github.event.inputs.customer_name }}. Kontakt telefoniczny: ${{ github.event.inputs.customer_phone }}. Urządzenie: ${{ github.event.inputs.device_description }}, numer seryjny: ${{ github.event.inputs.device_serial_number }}. Opis usterki: ${{ github.event.inputs.issue_description }}. SMS z potwierdzeniem został wysłany."
 
       - name: Przyjęcie urządzenia
-        run: echo "Urządzenie przyjęte do serwisu."
+        run: echo "Urządzenie przyjęte do serwisu. SMS z informacją został wysłany."
 
       - name: Diagnoza
-        run: echo "Rozpoczynamy diagnozę urządzenia."
+        run: echo "Rozpoczynamy diagnozę urządzenia. SMS z informacją został wysłany."
 
       - name: Wycena naprawy
-        run: echo "Przygotowujemy wycenę naprawy."
+        run: echo "Przygotowujemy wycenę naprawy. SMS z wyceną został wysłany."
 
       - name: Informacja o wycenie
-        run: echo "Informacja o wycenie została przesłana do klienta."
+        run: echo "Informacja o wycenie została przesłana do klienta. SMS z prośbą o potwierdzenie został wysłany."
 
       - name: Oczekiwanie na decyzję klienta
-        run: echo "Czekamy na decyzję klienta dotyczącą naprawy."
+        run: echo "Czekamy na decyzję klienta dotyczącą naprawy. SMS z przypomnieniem został wysłany."
 
       - name: Naprawa urządzenia
-        run: echo "Urządzenie jest w trakcie naprawy."
+        run: echo "Urządzenie jest w trakcie naprawy. SMS z informacją został wysłany."
 
       - name: Powrót do serwisomatu
-        run: echo "Naprawa zakończona. Urządzenie gotowe do odbioru."
+        run: echo "Naprawa zakończona. Urządzenie gotowe do odbioru. SMS z informacją został wysłany."
 
       - name: Odbiór przez klienta
-        run: echo "Urządzenie zostało odebrane przez klienta. Dziękujemy za skorzystanie z naszych usług!"
+        run: echo "Urządzenie zostało odebrane przez klienta. Dziękujemy za skorzystanie z naszych usług! SMS z podziękowaniem został wysłany."
