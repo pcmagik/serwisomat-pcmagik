@@ -10,9 +10,12 @@ on:
         description: 'Numer telefonu klienta'
         required: true
       device_description:
-        description: 'Marka oraz numer seryjny urządzenia'
+        description: 'Marka oraz model urządzenia'
         required: true
-      model_serial_number:
+      device_serial_number:
+        description: 'Numer seryjny urządzenia'
+        required: true
+      issue_description:
         description: 'Opis Usterki'
         required: true
 
@@ -22,7 +25,7 @@ jobs:
     steps:
       - name: Zgłoszenie naprawy
         run: |
-             echo "Zgłoszenie od klienta: ${{ github.event.inputs.customer_name }}. Kontakt telefoniczny: ${{ github.event.inputs.customer_phone }}. Urządzenie: ${{ github.event.inputs.device_description }}. Opis usterki: ${{ github.event.inputs.model_serial_number }}."
+              echo "Zgłoszenie od klienta: ${{ github.event.inputs.customer_name }}. Kontakt telefoniczny: ${{ github.event.inputs.customer_phone }}. Urządzenie: ${{ github.event.inputs.device_description }}, numer seryjny: ${{ github.event.inputs.device_serial_number }}. Opis usterki: ${{ github.event.inputs.issue_description }}."
 
       - name: Przyjęcie urządzenia
         run: echo "Urządzenie przyjęte do serwisu."
