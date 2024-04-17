@@ -4,48 +4,37 @@ on:
   workflow_dispatch:
     inputs:
       customer_email:
-        description: 'Email Klienta'
+        description: 'Email klienta'
         required: true
       device_description:
-        description: 'Opis Urządzenia'
+        description: 'Opis urządzenia'
         required: true
-      repair_approved:
-            description: 'Repair Approved'
-            required: true
+
 jobs:
   process_repair:
     runs-on: ubuntu-latest
     steps:
       - name: Zgłoszenie naprawy
         run: |
-             echo "Zgłoszenie przyjęte od ${{ github.event.inputs.customer_email }} dla urządzenia: ${{ github.event.inputs.device_description }}"
+             echo "Zgłoszenie przyjęte. Klient: ${{ github.event.inputs.customer_email }}, Urządzenie: ${{ github.event.inputs.device_description }}. Wysyłanie SMS z potwierdzeniem przyjęcia zgłoszenia."
 
-      - name: Przyjęcie urządzenia
-        run: echo "Urządzenie przyjęte do serwisu"
+      - name: Przyjęcie urządzenia do serwisu
+        run: echo "Urządzenie przyjęte do serwisu. Wysyłanie SMS z informacją o przyjęciu urządzenia do serwisu."
 
-      - name: Diagnoza
-        run: echo "Diagnoza urządzenia w toku"
+      - name: Diagnoza urządzenia
+        run: echo "Diagnoza urządzenia w toku. Wysyłanie SMS z informacją o rozpoczęciu diagnozy."
 
       - name: Wycena naprawy
-        run: echo "Wycena wysłana do klienta. Oczekiwanie na odpowiedź..."
-        # Tutaj możesz zintegrować logikę wysyłania wyceny do klienta przez zewnętrzne narzędzie
+        run: echo "Wycena naprawy przesłana do klienta. Wysyłanie SMS z wyceną i prośbą o potwierdzenie."
 
-  # Możesz mieć osobny workflow dla akceptacji naprawy przez klienta,
-  # który będzie wyzwalany, gdy klient podejmie decyzję.
-  repair_decision:
-    needs: process_repair
-    runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.repair_approved == 'true' }}
-    steps:
+      - name: Oczekiwanie na decyzję klienta
+        run: echo "Oczekiwanie na decyzję klienta. Wysyłanie SMS z przypomnieniem o konieczności akceptacji wyceny."
+
       - name: Naprawa urządzenia
-        run: echo "Naprawa urządzenia w toku"
+        run: echo "Decyzja pozytywna. Naprawa urządzenia w toku. Wysyłanie SMS z informacją o rozpoczęciu naprawy."
 
-  # Możesz również mieć osobny workflow dla opłaty diagnozy,
-  # który będzie wyzwalany, gdy klient odmówi naprawy.
-  diagnosis_fee:
-    needs: process_repair
-    runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.repair_approved == 'false' }}
-    steps:
-      - name: Opłata za diagnozę
-        run: echo "Opłata za diagnozę naliczona. Klient zostanie poinformowany."
+      - name: Powrót do serwisomatu
+        run: echo "Urządzenie naprawione. Wysyłanie SMS z informacją o zakończeniu naprawy i gotowości do odbioru."
+
+      - name: Odbiór przez klienta
+        run: echo "Urządzenie odebrane przez klienta. Wysyłanie SMS z podziękowaniem za skorzystanie z usług."
