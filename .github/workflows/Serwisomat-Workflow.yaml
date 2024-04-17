@@ -3,11 +3,17 @@ name: Serwisomat Workflow
 on:
   workflow_dispatch:
     inputs:
-      customer_email:
-        description: 'Email klienta'
+      customer_name:
+        description: 'Imię i nazwisko klienta'
+        required: true
+      customer_phone:
+        description: 'Numer telefonu klienta'
         required: true
       device_description:
-        description: 'Opis urządzenia'
+        description: 'Marka oraz numer seryjny urządzenia'
+        required: true
+      model_serial_number:
+        description: 'Opis Usterki'
         required: true
 
 jobs:
@@ -16,7 +22,8 @@ jobs:
     steps:
       - name: Zgłoszenie naprawy
         run: |
-             echo "Zgłoszenie przyjęte. Klient: ${{ github.event.inputs.customer_email }}, Urządzenie: ${{ github.event.inputs.device_description }}. Wysyłanie SMS z potwierdzeniem przyjęcia zgłoszenia."
+             echo "Zgłoszenie od klienta: ${{ github.event.inputs.customer_name }}. Kontakt telefoniczny: ${{ github.event.inputs.customer_phone }}. Urządzenie: ${{ github.event.inputs.device_description }}. Opis usterki: ${{ github.event.inputs.model_serial_number }}."
+             Wysyłanie SMS z potwierdzeniem przyjęcia zgłoszenia."
 
       - name: Przyjęcie urządzenia do serwisu
         run: echo "Urządzenie przyjęte do serwisu. Wysyłanie SMS z informacją o przyjęciu urządzenia do serwisu."
